@@ -51,8 +51,8 @@ const Header = () => {
       </nav>
 
       {/* Asosiy navbar */}
-      <div className="bg-white py-3 flex justify-center">
-        <div className="container w-full max-w-[1200px] h-[80px] flex items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="bg-white py-3 flex justify-center ">
+        <div className="container w-full max-w-[1200px] h-[80px] flex items-center justify-between px-4 sm:px-6 h-[40px] lg:px-8">
           {/* Logo */}
           <div>
             <Link to="/">
@@ -93,7 +93,7 @@ const Header = () => {
             <input
               type="text"
               placeholder="Mahsulotlar izlash"
-              className="px-3 py-2 outline-none w-64 h-10 text-green-700 font-bold"
+              className="px-3 py-2 outline-none w-104 h-10 text-green-700 font-bold"
             />
             <button className="w-15 bg-green-200 flex justify-center items-center text-[21px] text-green-700 hover:bg-green-300 transition">
               <IoSearchSharp />
@@ -143,7 +143,23 @@ const Header = () => {
               className="w-6 h-6 cursor-pointer"
             />
           </div>
+          
         </div>
+
+
+
+      </div>
+      <div className="w-[80%] flex justify-center lg:hidden">
+      <div className="flex border border-gray-400 overflow-hidden m-auto  lg:hidden">
+            <input
+              type="text"
+              placeholder="Mahsulotlar izlash"
+              className="px-3 py-2 outline-none w-100 h-10 text-green-700 font-bold"
+            />
+            <button className="w-15 bg-green-200 flex justify-center items-center text-[21px] text-green-700 hover:bg-green-300 transition">
+              <IoSearchSharp />
+            </button>
+          </div>
       </div>
 
       {/* Mobil versiya uchun pastki menyu */}
