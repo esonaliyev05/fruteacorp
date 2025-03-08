@@ -11,6 +11,7 @@ import Shopcars from "./Pages/Hozir-sotip-olish/Shopcars";
 import Orders from "./Pages/Buyurtmalarim/Orders";
 import Like from "./Pages/Saralangan/Like";
 import NotFount from "./Pages/NotFount/NotFount";
+import Products from "./Pages/products/Products";
 
 const App = () => {
   return (
@@ -24,7 +25,7 @@ const App = () => {
             <Route path="about" element={<About />} />
             <Route path="user" element={<UserPage />} />
             <Route path="like" element={<Like/>} />
-            <Route path="shirinliklar" element={<Shirinliklar />} />
+            <Route path="products" element={<Products />} />
             <Route path="shopcars" element={<Shopcars/>} />
             <Route path="shoppages" element={<ShopPages/>}/>
             <Route path="orders" element={<Orders/>}/>
