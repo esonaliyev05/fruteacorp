@@ -1,20 +1,25 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { HiMiniBarsArrowDown, HiMiniBarsArrowUp } from "react-icons/hi2";
 import { FaUser, FaShoppingCart, FaHeart } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 import { IoSearchSharp } from "react-icons/io5";
 import { FaRegUser } from "react-icons/fa";
 import { LiaShoppingBagSolid } from "react-icons/lia";
+import { GiGrapes } from "react-icons/gi";
+import { BiSearch } from "react-icons/bi";
+import { FiShoppingBag } from "react-icons/fi";
+import { AiOutlineHeart } from "react-icons/ai";
+import { HiOutlineUser } from "react-icons/hi";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="w-full">
+    <header className="w-full">
       {/* Yuqori navbar */}
-      <nav className="bg-green-200 w-full h-[38px] flex justify-center items-center md:bg-none">
-        <div className="container flex justify-center items-center px-4 gap-[15px]">
+      <nav className=" bg-green-200 w-full h-[38px] flex justify-center items-center hidden lg:flex ">
+        <div className="container  flex justify-center items-center px-4 gap-[15px]">
           <ul className="flex gap-4 text-[16px] font-semibold">
             <Link to="shoppages" className="hover:text-green-700">
               Hozir sotib olish
@@ -45,24 +50,27 @@ const Header = () => {
             />
           </div>
         </div>
+
+
+
       </nav>
 
       {/* Asosiy navbar */}
-      <div className="w-full bg-white border-b border-gray-300 py-3 flex justify-center">
-        <div className="container max-w-[1200px] h-[80px] flex items-center justify-between">
+      <div className=" bg-white py-3 flex justify-center lg:flex m-auto">
+        <div className="container w-[1200px] h-[80px] flex items-center justify-between px-3 sm:h-[50px] md:h-[80px]">
           {/* Logo */}
           <div>
             <Link to={"/"}>
             <img
               src="public/navbar/logo-1-Dw9Tt7XS.png"
               alt="Logo"
-              className="h-10"
+              className="h-10 "
               />
               </Link>
           </div>
 
           {/* Katalog tugmasi */}
-          <div className="relative">
+          <div className=" relative lg:flex hidden">
             <button
               onClick={() => setOpen(!open)}
               className="flex items-center gap-2 bg-green-200 w-[120px] h-[35px] justify-center text-[green] rounded-md font-semibold hover:bg-green-300 transition"
@@ -89,11 +97,11 @@ const Header = () => {
           </div>
 
           {/* Qidiruv paneli */}
-          <div className="flex border border-gray-400 rounded-md overflow-hidden">
+          <div className="flex border border-gray-400  overflow-hidden lg:flex hidden">
             <input
               type="text"
               placeholder="Mahsulotlar izlash"
-              className="px-3 py-2 outline-none w-100 h-10 text-[green] font-bold"
+              className="px-3 py-2 outline-none w-100 h-10 text-[green] font-bold "
             />
             <button className="w-15 bg-green-200 flex justify-center items-center text-[21px] text-[green] hover:bg-green-300 transition">
               <IoSearchSharp />
@@ -101,7 +109,7 @@ const Header = () => {
           </div>
 
           {/* Foydalanuvchi va savat */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 lg:flex hidden">
             <Link
               to="user"
               className="flex items-center gap-1 text-gray-700 hover:text-green-700"
@@ -124,9 +132,83 @@ const Header = () => {
               </span>
             </Link>
           </div>
+
+          <div className="flex items-center gap-2  block lg:hidden">
+            <img
+              src="public/navbar/uz-DrneayDM.png"
+              alt="Uz"
+              className="w-6 h-6 cursor-pointer"
+            />
+            <img
+              src="public/navbar/en-BAm130Vq.png"
+              alt="Ru"
+              className="w-6 h-6 cursor-pointer"
+            />
+            <img
+              src="public/navbar/ru-CMQfAJug.png"
+              alt="En"
+              className="w-6 h-6 cursor-pointer"
+            />
+          </div>
+
         </div>
       </div>
+
+     
+
+     {/* pasdagi medyu  */}
+      
+      <div className="fixed w-full h-[60px] px-6 py-3 border-t bg-white flex justify-center  bottom-0 block lg:hidden ">
+       
+      <div className="container  h-full flex justify-between items-center ">
+      <NavLink
+        to="/"
+        className="flex flex-col items-center text-gray-500 transition-all duration-200 active:text-green-600"
+      >
+        <GiGrapes className="text-2xl" />
+        <p className="text-sm font-medium">Bosh sahifa</p>
+      </NavLink>
+
+      <NavLink
+        to="/katalog"
+        className="flex flex-col items-center text-gray-500 transition-all duration-200 active:text-green-600"
+      >
+        <BiSearch className="text-2xl" />
+        <p className="text-sm font-medium">Katalog</p>
+      </NavLink>
+
+      <NavLink
+        to="/savat"
+        className="flex flex-col items-center relative text-gray-500 transition-all duration-200 active:text-green-600"
+      >
+        <FiShoppingBag className="text-2xl" />
+        <p className="text-sm font-medium">Savat</p>
+        <span className="absolute -top-1 -right-2 bg-green-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">
+          1
+        </span>
+      </NavLink>
+
+      <NavLink
+        to="/saralangan"
+        className="flex flex-col items-center text-gray-500 transition-all duration-200 active:text-green-600"
+      >
+        <AiOutlineHeart className="text-2xl" />
+        <p className="text-sm font-medium">Saralangan</p>
+      </NavLink>
+
+      <NavLink
+        to="/kabinet"
+        className="flex flex-col items-center text-gray-500 transition-all duration-200 active:text-green-600"
+      >
+        <HiOutlineUser className="text-2xl" />
+        <p className="text-sm font-medium">Kabinet</p>
+      </NavLink>
     </div>
+
+
+      </div>
+
+    </header>
   );
 };
 
