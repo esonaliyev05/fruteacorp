@@ -33,7 +33,7 @@ const Header = () => {
       <nav className="bg-green-200 w-full h-[38px] flex justify-center items-center hidden lg:flex">
         <div className="container flex justify-center items-center px-4 gap-[15px]">
           <ul className="flex gap-4 text-[16px] font-semibold">
-            <Link to="shoppages" className="hover:text-green-700">
+            <Link to="products" className="hover:text-green-700">
               Hozir sotib olish
             </Link>
             <Link to="faq" className="hover:text-green-700">
