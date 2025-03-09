@@ -12,6 +12,8 @@ import Orders from "./Pages/Buyurtmalarim/Orders";
 import Like from "./Pages/Saralangan/Like";
 import NotFount from "./Pages/NotFount/NotFount";
 import Products from "./Pages/products/Products";
+import Tea from "./components/producs/Tea";
+import Sweets from "./components/producs/Sweets";
 
 const App = () => {
   return (
@@ -26,6 +28,8 @@ const App = () => {
             <Route path="user" element={<UserPage />} />
             <Route path="like" element={<Like/>} />
             <Route path="products" element={<Products />} />
+            <Route path="products/id" element={<Tea/>}/>
+            <Route path="products/id" element={<Sweets/>}/>
             <Route path="shopcars" element={<Shopcars/>} />
             <Route path="shoppages" element={<ShopPages/>}/>
             <Route path="orders" element={<Orders/>}/>
