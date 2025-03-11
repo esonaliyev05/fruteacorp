@@ -89,7 +89,7 @@ const Header = () => {
 
             {open && (
               <div className="absolute left-0 top-12 bg-white border border-green-500 rounded-md shadow-lg w-55 min-h-15">
-                <Link to="/" className="block px-4 py-2 hover:bg-gray-100">
+                <Link to="products?category=tea" className="block px-4 py-2 hover:bg-gray-100">
                   Choy
                 </Link>
                 <Link

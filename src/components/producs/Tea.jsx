@@ -20,14 +20,14 @@ const Tea = () => {
 
   return (
     <div className="p-5 text-center">
-      <h1 className="text-2xl font-bold mb-6">Mahsulotlar</h1>
+      {/* <h1 className="text-2xl font-bold mb-6">Mahsulotlar</h1> */}
       {error && <p className="text-red-500">{error}</p>}
       <div className="flex flex-wrap gap-6 justify-center">
         {products.map((product, index) => (
           <div key={index} className="border border-gray-200 rounded-lg shadow-lg p-4 w-64 text-center">
             {product.images && product.images.length > 0 && (
               <img 
-                src={`${BACKEND_URL}/${product.images[0].image.name}`} 
+                src={product.images[0].image.name}
                 alt={product.title_uz} 
                 className="w-24 h-24 mx-auto rounded-lg mb-4"
               />
