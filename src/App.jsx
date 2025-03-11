@@ -14,6 +14,7 @@ import NotFount from "./Pages/NotFount/NotFount";
 import Products from "./Pages/products/Products";
 import Tea from "./components/producs/Tea";
 import Sweets from "./components/producs/Sweets";
+import Card from "./components/card/Card";
 
 const App = () => {
   return (
