@@ -28,10 +28,10 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="w-full">
+    <header className="w-full overflow-x-hidden">
       {/* Yuqori navbar */}
       <nav className="bg-green-200 w-full h-[38px] flex justify-center items-center hidden lg:flex">
-        <div className="container flex justify-center items-center px-4 gap-[15px]">
+        <div className="container flex justify-center items-center px-4 gap-[15px] max-w-[1200px] mx-auto">
           <ul className="flex gap-4 text-[16px] font-semibold">
             <Link to="products" className="hover:text-green-700">
               Hozir sotib olish
@@ -66,7 +66,7 @@ const Header = () => {
 
       {/* Asosiy navbar */}
       <div className="bg-white py-3 flex justify-center">
-        <div className="container w-full max-w-[1200px] h-[80px] flex items-center justify-between px-4 sm:px-6 h-[40px] lg:px-8">
+        <div className="container w-full max-w-[1200px] h-[80px] flex items-center justify-between px-4 sm:px-6 h-[40px] lg:px-8 mx-auto">
           {/* Logo */}
           <div>
             <Link to="/">
@@ -76,6 +76,25 @@ const Header = () => {
                 className="h-10 sm:h-8 lg:h-10"
               />
             </Link>
+          </div>
+
+          {/* Tillarni almashtirish (faqat mobil versiya uchun) */}
+          <div className="flex items-center gap-2 lg:hidden">
+            <img
+              src="public/navbar/uz-DrneayDM.png"
+              alt="Uz"
+              className="w-6 h-6 cursor-pointer"
+            />
+            <img
+              src="public/navbar/en-BAm130Vq.png"
+              alt="Ru"
+              className="w-6 h-6 cursor-pointer"
+            />
+            <img
+              src="public/navbar/ru-CMQfAJug.png"
+              alt="En"
+              className="w-6 h-6 cursor-pointer"
+            />
           </div>
 
           {/* Katalog tugmasi */}
@@ -102,7 +121,7 @@ const Header = () => {
             )}
           </div>
 
-          {/* Qidiruv paneli */}
+          {/* Qidiruv paneli (katta ekranlar uchun) */}
           <div className="flex border border-gray-400 overflow-hidden hidden lg:flex">
             <input
               type="text"
@@ -114,7 +133,7 @@ const Header = () => {
             </button>
           </div>
 
-          {/* Foydalanuvchi va savat */}
+          {/* Foydalanuvchi va savat (katta ekranlar uchun) */}
           <div className="hidden lg:flex items-center gap-4">
             <Link
               to="user"
@@ -138,45 +157,28 @@ const Header = () => {
               </span>
             </Link>
           </div>
-
-          {/* Mobil versiya uchun tillar */}
-          <div className="flex items-center gap-2 lg:hidden">
-            <img
-              src="public/navbar/uz-DrneayDM.png"
-              alt="Uz"
-              className="w-6 h-6 cursor-pointer"
-            />
-            <img
-              src="public/navbar/en-BAm130Vq.png"
-              alt="Ru"
-              className="w-6 h-6 cursor-pointer"
-            />
-            <img
-              src="public/navbar/ru-CMQfAJug.png"
-              alt="En"
-              className="w-6 h-6 cursor-pointer"
-            />
-          </div>
         </div>
       </div>
 
-      {/* Mobil versiya uchun qidiruv paneli */}
-      <div className="w-[80%] flex justify-center lg:hidden">
-        <div className="flex border border-gray-400 overflow-hidden m-auto lg:hidden">
-          <input
-            type="text"
-            placeholder="Mahsulotlar izlash"
-            className="px-3 py-2 outline-none w-100 h-10 text-green-700 font-bold"
-          />
-          <button className="w-15 bg-green-200 flex justify-center items-center text-[21px] text-green-700 hover:bg-green-300 transition">
-            <IoSearchSharp />
-          </button>
+      {/* Mobil versiya uchun qidiruv paneli (katta menyudagi qidiruvni pastga tushirish) */}
+      <div className="w-full flex justify-center lg:hidden">
+        <div className="container flex justify-center">
+          <div className="flex border border-gray-400 overflow-hidden w-[90%]">
+            <input
+              type="text"
+              placeholder="Mahsulotlar izlash"
+              className="px-3 py-2 outline-none w-full h-10 text-green-700 font-bold"
+            />
+            <button className="w-15 bg-green-200 flex justify-center items-center text-[21px] text-green-700 hover:bg-green-300 transition">
+              <IoSearchSharp />
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Mobil versiya uchun pastki menyu */}
       <div className="fixed w-full h-[60px] px-6 py-3 border-t bg-white flex justify-center bottom-0 lg:hidden">
-        <div className="container h-full flex justify-between items-center">
+        <div className="container h-full flex justify-between items-center max-w-[1200px] mx-auto">
           <NavLink
             to="/"
             className="flex flex-col items-center text-gray-500 transition-all duration-200 active:text-green-600"
