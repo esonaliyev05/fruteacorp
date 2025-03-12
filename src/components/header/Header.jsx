@@ -28,7 +28,7 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="w-full overflow-x-hidden">
+    <header className="w-full">
       {/* Yuqori navbar */}
       <nav className="bg-green-200 w-full h-[38px] flex justify-center items-center hidden lg:flex">
         <div className="container flex justify-center items-center px-4 gap-[15px] max-w-[1200px] mx-auto">
@@ -108,7 +108,10 @@ const Header = () => {
 
             {open && (
               <div className="absolute left-0 top-12 bg-white border border-green-500 rounded-md shadow-lg w-55 min-h-15">
-                <Link to="products?category=tea" className="block px-4 py-2 hover:bg-gray-100">
+                <Link
+                  to="products?category=tea"
+                  className="block px-4 py-2 hover:bg-gray-100"
+                >
                   Choy
                 </Link>
                 <Link
