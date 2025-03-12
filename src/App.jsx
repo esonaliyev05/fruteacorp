@@ -28,13 +28,16 @@ const App = () => {
             <Route path="about" element={<About />} />
             <Route path="user" element={<UserPage />} />
             <Route path="like" element={<Like/>} />
-            <Route path="products" element={<Products />} />
-            <Route path="products/tea" element={<Tea />} /> 
-            <Route path="products/sweets" element={<Sweets />} />
+            <Route path="products" element={<Products />} >
+            <Route path="tea" element={<Tea />} /> 
+            <Route path="sweets" element={<Sweets />} />
+            </Route>
+         
             <Route path="shopcars" element={<Shopcars/>} />
             <Route path="shoppages" element={<ShopPages/>}/>
             <Route path="orders" element={<Orders/>}/>
             <Route path="faq" element={<Faq/>}/>
+            
           </Route>
         </Routes>
       </BrowserRouter>
