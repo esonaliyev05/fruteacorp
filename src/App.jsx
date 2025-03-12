@@ -7,12 +7,10 @@ import Like from './Pages/Like/Like'
 const App = () => {
   return (
     <>
-         <BrowserRouter>
+    <BrowserRouter>
       <Routes>
         <Route element={<Layout/>}>
-
           <Route index element={<HomePage/>} />
-          
           <Route path="like" element={<Like />} />
           <Route path="brands" element={<BrandsPage />} />
           <Route path="brands/:id" element={<SingleBrandPage />} />
