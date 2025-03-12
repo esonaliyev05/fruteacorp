@@ -7,13 +7,15 @@ import Like from './Pages/Like/Like'
 const App = () => {
   return (
     <>
-    <BrowserRouter>
+         <BrowserRouter>
       <Routes>
         <Route element={<Layout/>}>
+
           <Route index element={<HomePage/>} />
+          
           <Route path="like" element={<Like />} />
-          <Route path="brands" element={<BrandsPage />} />
-          <Route path="brands/:id" element={<SingleBrandPage />} />
+          {/* <Route path="brands" element={<BrandsPage />} /> */}
+          {/* <Route path="brands/:id" element={<SingleBrandPage />} />
           <Route path="services/uslugbuggies" element={<UslugBuggiesPage />} />
           <Route path="services/uslugcar" element={<UslugCarPage />} />
           <Route path="services" element={<ServicePage />} />
@@ -22,7 +24,7 @@ const App = () => {
           <Route path="blog" element={<BlogPage />} />
           <Route path="blog/singleblog" element={<SingleBlogPage />} />
           <Route path="blog/singleblog2" element={<SingleBlogPage2 />} />
-          <Route path="blog/singleblog3" element={<SingleBlogPage3 />} />
+          <Route path="blog/singleblog3" element={<SingleBlogPage3 />} /> */}
         </Route>
       </Routes>
     </BrowserRouter>
