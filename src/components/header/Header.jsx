@@ -9,10 +9,16 @@ import { BiSearch } from "react-icons/bi";
 import { FiShoppingBag } from "react-icons/fi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { HiOutlineUser } from "react-icons/hi";
+import Modal from "./Modal/Modal";
+import axios from "axios";
+import { BACKEND_URL } from "../../Api/Beckend";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
+  const [modal, setModal] = useState(false);
+  const [firstName, setFirstName] = useState(null);
   const menuRef = useRef(null);
+  const token = localStorage.getItem("token");
 
   const handleClickOutside = (event) => {
     if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -21,11 +27,24 @@ const Header = () => {
   };
 
   useEffect(() => {
+    const getMe = async () => {
+      try {
+        const response = await axios.get(`${BACKEND_URL}/auth/getme`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setFirstName(response?.data?.data?.firstName);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    token && getMe();
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [modal]);
 
   return (
     <header className="w-full">
@@ -39,9 +58,11 @@ const Header = () => {
             <Link to="faq" className="hover:text-green-700">
               Savol-Javob
             </Link>
-            <Link to="/orders" className="hover:text-green-700">
-              Buyurtmalarim
-            </Link>
+            {token && (
+              <Link to="/user" className="hover:text-green-700">
+                Buyurtmalarim
+              </Link>
+            )}
           </ul>
 
           <div className="flex items-center gap-2">
@@ -66,7 +87,7 @@ const Header = () => {
 
       {/* Asosiy navbar */}
       <div className="bg-white py-3 flex justify-center">
-        <div className="container w-full max-w-[1200px] h-[80px] flex items-center justify-between px-4 sm:px-6 h-[40px] lg:px-8 mx-auto">
+        <div className="container w-full max-w-[1300px] h-[80px] flex items-center justify-between px-4 sm:px-6 h-[40px] lg:px-8 mx-auto">
           {/* Logo */}
           <div>
             <Link to="/">
@@ -138,12 +159,21 @@ const Header = () => {
 
           {/* Foydalanuvchi va savat (katta ekranlar uchun) */}
           <div className="hidden lg:flex items-center gap-4">
-            <Link
-              to="user"
-              className="flex items-center gap-1 text-gray-700 hover:text-green-700"
-            >
-              <FaRegUser /> Kirish
-            </Link>
+            {firstName ? (
+              <Link
+                to={"user"}
+                className="flex items-center gap-1 text-gray-700 hover:text-green-700 cursor-pointer"
+              >
+                <FaRegUser /> {firstName}
+              </Link>
+            ) : (
+              <button
+                className="flex items-center gap-1 text-gray-700 hover:text-green-700 cursor-pointer"
+                onClick={() => setModal(true)}
+              >
+                <FaRegUser /> Kirish
+              </button>
+            )}
             <Link
               to="like"
               className="flex items-center gap-1 text-gray-700 hover:text-green-700"
@@ -226,6 +256,8 @@ const Header = () => {
           </NavLink>
         </div>
       </div>
+
+      {modal && <Modal setCheck={setModal} />}
     </header>
   );
 };
