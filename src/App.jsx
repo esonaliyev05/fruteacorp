@@ -36,10 +36,10 @@ const App = () => {
               <Route path="tea" element={<Tea />} />
               <Route path="sweets" element={<Sweets />} />
             </Route>
-
             <Route path="shopcars" element={<Shopcars />} />
             <Route path="shoppages" element={<ShopPages />} />
             {/* <Route path="orders" element={<Orders />} /> */}
+
             <Route path="faq" element={<Faq />} />
           </Route>
         </Routes>
