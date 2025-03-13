@@ -9,7 +9,7 @@ const Footer = () => {
          <div className="flex gap-[20px]">
           <NavLink to={"about"}>Kompaniya haqida</NavLink>
           <NavLink>Biz bilan bog'lanish</NavLink>
-          <NavLink to={"faq"}>Savol-Javob</NavLink>
+          <NavLink to="/faq">Savol-Javob</NavLink>
          </div>
 
          <div className="flex gap-[15px]">
