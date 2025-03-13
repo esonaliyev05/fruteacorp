@@ -13,6 +13,7 @@ import NotFount from "./Pages/NotFount/NotFount";
 import Products from "./Pages/products/Products";
 import Tea from "./components/producs/Tea";
 import Sweets from "./components/producs/Sweets";
+import "swiper/css";
 import Card from "./components/card/Card";
 import UserOrders from "./Pages/Foydalanuchi/UserOrders";
 import UserSettings from "./Pages/Foydalanuchi/UserSettings";
@@ -29,10 +30,8 @@ const App = () => {
             <Route path="*" element={<NotFount />} />
             <Route path="like" element={<Like />} />
             <Route path="about" element={<About />} />
-            <Route path="user" element={<UserPage />}>
-              <Route index element={<UserOrders />} />
-              <Route path="settings" element={<UserSettings />} />
-            </Route>
+            <Route path="user" element={<UserPage />} />
+            <Route path="like" element={<Like />} />
             <Route path="products" element={<Products />}>
               <Route path="tea" element={<Tea />} />
               <Route path="sweets" element={<Sweets />} />
@@ -40,6 +39,7 @@ const App = () => {
 
             <Route path="shopcars" element={<Shopcars />} />
             <Route path="shoppages" element={<ShopPages />} />
+            <Route path="orders" element={<Orders />} />
             <Route path="faq" element={<Faq />} />
           </Route>
         </Routes>
