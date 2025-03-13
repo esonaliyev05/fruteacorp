@@ -51,12 +51,11 @@ console.log(resultSearchData?.length);
         }  overflow-hidden lg:flex`}
       >
         <input
-          className="z-[101] relative"
           onChange={(e) => handleSearchValue(e)}
           type="text"
           value={searchValue}
           placeholder="Mahsulotlar izlash"
-          className={`px-3 py-2 outline-none w-full h-10 text-green-700 font-bold ${
+          className={`z-[101] relative px-3 py-2 outline-none w-full h-10 text-green-700 font-bold ${
             res === "responsive"
               ? "bg-green-200 rounded-[10px] pl-[50px] text-green-900"
               : ""
@@ -80,6 +79,7 @@ console.log(resultSearchData?.length);
           }`}
         />
       </form>
+      {searchValue ? 
       <div className="flex w-full p-[20px] scrollbar-hide  overflow-y-scroll max-h-[500px] flex-col absolute z-[10] bg-white shadow-2xl rounded-b-[10px] top-[42px]">
         {resultSearchData?.map((product) =>
           resultSearchData?.length > 1 ? (
@@ -103,7 +103,8 @@ console.log(resultSearchData?.length);
             <h1 className="text-center">Mahsulot topilmadi!!!</h1>
           )
         )}
-      </div>
+      </div> : ""  
+    }
     </div>
   );
 };
