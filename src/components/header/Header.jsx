@@ -18,13 +18,13 @@ import { useTranslation } from "react-i18next";
 const Header = () => {
   const [open, setOpen] = useState(false);
   const [modal, setModal] = useState(false);
-  
   const [firstName, setFirstName] = useState(null);
   const menuRef = useRef(null);
-  const res = "responsive"
-  const token = localStorage.getItem('token')
+  const res = "responsive";
+  const token = localStorage.getItem('token');
+  console.log(token);
 
-  const { t, i18n } = useTranslation(); // To'g'ri ishlatish
+  const { t, i18n } = useTranslation();
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
@@ -45,17 +45,20 @@ const Header = () => {
           },
         });
         setFirstName(response?.data?.data?.firstName);
-        console.log(response?.data?.data?.firstName);
       } catch (error) {
-        console.error(error);
+        console.error("Xatolik:", error.response?.data || error.message);
       }
     };
-    token && getMe();
+
+    if (token) {
+      getMe();
+    }
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [modal]);
+  }, [token]);
 
   return (
     <header className="w-full">
@@ -85,13 +88,13 @@ const Header = () => {
             />
             <img
               src="public/navbar/en-BAm130Vq.png"
-              alt="Ru"
+              alt="En"
               className="w-6 h-6 cursor-pointer"
               onClick={() => changeLanguage("en")}
             />
             <img
               src="public/navbar/ru-CMQfAJug.png"
-              alt="En"
+              alt="Ru"
               className="w-6 h-6 cursor-pointer"
               onClick={() => changeLanguage("ru")}
             />
@@ -101,7 +104,7 @@ const Header = () => {
 
       {/* Asosiy navbar */}
       <div className="bg-white py-3 flex justify-center">
-        <div className="container w-full max-w-[1300px] h-[80px] flex items-center justify-between px-4 sm:px-6 h-[40px] lg:px-8 mx-auto">
+        <div className="container w-full max-w-[1300px] h-[80px] flex items-center justify-between px-4 sm:px-6 lg:px-8 mx-auto">
           {/* Logo */}
           <div>
             <Link to="/">
@@ -126,14 +129,12 @@ const Header = () => {
               alt="Ru"
               className="w-6 h-6 cursor-pointer"
               onClick={() => changeLanguage("ru")}
-
             />
             <img
               src="public/navbar/ru-CMQfAJug.png"
               alt="En"
               className="w-6 h-6 cursor-pointer"
               onClick={() => changeLanguage("en")}
-
             />
           </div>
 
@@ -158,7 +159,6 @@ const Header = () => {
                   to="products/sweets"
                   className="block px-4 py-2 hover:bg-gray-100"
                 >
-                  
                   {t("Shirinliklar")}
                 </Link>
               </div>
@@ -222,7 +222,7 @@ const Header = () => {
           </NavLink>
 
           <NavLink
-            to="/katalog"
+            to="/products"
             className="flex flex-col items-center text-gray-500 transition-all duration-200 active:text-green-600"
           >
             <BiSearch className="text-2xl" />
@@ -230,7 +230,7 @@ const Header = () => {
           </NavLink>
 
           <NavLink
-            to="/savat"
+            to="/shopcars"
             className="flex flex-col items-center relative text-gray-500 transition-all duration-200 active:text-green-600"
           >
             <FiShoppingBag className="text-2xl" />
@@ -241,7 +241,7 @@ const Header = () => {
           </NavLink>
 
           <NavLink
-            to="/saralangan"
+            to="/like"
             className="flex flex-col items-center text-gray-500 transition-all duration-200 active:text-green-600"
           >
             <AiOutlineHeart className="text-2xl" />
@@ -251,14 +251,17 @@ const Header = () => {
           <NavLink
             to="/kabinet"
             className="flex flex-col items-center text-gray-500 transition-all duration-200 active:text-green-600"
+            onClick={() => setModal(true)}
           >
             <HiOutlineUser className="text-2xl" />
-            <p className="text-sm font-medium">Kabinet</p>
+            <p className="text-sm font-medium">{t("Kabinet")}</p>
+            
           </NavLink>
+          
         </div>
       </div>
 
-      {modal && <Modal   setCheck={setModal} />}
+      {modal && <Modal setCheck={setModal} />}
     </header>
   );
 };
