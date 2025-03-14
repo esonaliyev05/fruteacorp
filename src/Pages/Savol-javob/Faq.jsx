@@ -14,7 +14,6 @@ const Faq = () => { // i18n ni props orqali qabul qilish
   return (
     <div className="h-full w-[1200px] mx-auto px-8">
 
-
       <h1 className="text-[20px] sm:text-[24px] font-bold mb-[15px] sm:mb-[30px]">
         {t("Savollar va javoblar")} {/* Tarjima qilingan sarlavha */}
       </h1>
