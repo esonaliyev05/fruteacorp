@@ -13,6 +13,7 @@ import SearchForm from './search-form/index';
 import Modal from "./Modal/Modal";
 import axios from "axios";
 import { BACKEND_URL } from "../../Api/Beckend";
+import { useTranslation } from "react-i18next";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
@@ -22,6 +23,12 @@ const Header = () => {
   const menuRef = useRef(null);
   const res = "responsive"
   const token = localStorage.getItem('token')
+
+  const { t, i18n } = useTranslation(); // To'g'ri ishlatish
+
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+  };
 
   const handleClickOutside = (event) => {
     if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -57,14 +64,14 @@ const Header = () => {
         <div className="container flex justify-center items-center px-4 gap-[15px] max-w-[1200px] mx-auto">
           <ul className="flex gap-4 text-[16px] font-semibold">
             <Link to="products" className="hover:text-green-700">
-              Hozir sotib olish
+              {t("Hozir sotib olish")}
             </Link>
             <Link to="faq" className="hover:text-green-700">
-              Savol-Javob
+              {t("Savol-Javob")}
             </Link>
             {token && (
               <Link to="/user" className="hover:text-green-700">
-                Buyurtmalarim
+                {t("Buyurtmalarim")}
               </Link>
             )}
           </ul>
@@ -74,16 +81,19 @@ const Header = () => {
               src="public/navbar/uz-DrneayDM.png"
               alt="Uz"
               className="w-6 h-6 cursor-pointer"
+              onClick={() => changeLanguage("uz")}
             />
             <img
               src="public/navbar/en-BAm130Vq.png"
               alt="Ru"
               className="w-6 h-6 cursor-pointer"
+              onClick={() => changeLanguage("en")}
             />
             <img
               src="public/navbar/ru-CMQfAJug.png"
               alt="En"
               className="w-6 h-6 cursor-pointer"
+              onClick={() => changeLanguage("ru")}
             />
           </div>
         </div>
@@ -109,16 +119,21 @@ const Header = () => {
               src="public/navbar/uz-DrneayDM.png"
               alt="Uz"
               className="w-6 h-6 cursor-pointer"
+              onClick={() => changeLanguage("uz")}
             />
             <img
               src="public/navbar/en-BAm130Vq.png"
               alt="Ru"
               className="w-6 h-6 cursor-pointer"
+              onClick={() => changeLanguage("ru")}
+
             />
             <img
               src="public/navbar/ru-CMQfAJug.png"
               alt="En"
               className="w-6 h-6 cursor-pointer"
+              onClick={() => changeLanguage("en")}
+
             />
           </div>
 
@@ -128,7 +143,7 @@ const Header = () => {
               onClick={() => setOpen(!open)}
               className="flex items-center gap-2 bg-green-200 w-[120px] h-[35px] justify-center text-green-700 rounded-md font-semibold hover:bg-green-300 transition"
             >
-              {open ? <HiMiniBarsArrowUp /> : <HiMiniBarsArrowDown />} Katalog
+              {open ? <HiMiniBarsArrowUp /> : <HiMiniBarsArrowDown />} {t("Katalog")}
             </button>
 
             {open && (
@@ -137,13 +152,14 @@ const Header = () => {
                   to="products/tea"
                   className="block px-4 py-2 hover:bg-gray-100"
                 >
-                  Choy
+                  {t("Choy")}
                 </Link>
                 <Link
                   to="products/sweets"
                   className="block px-4 py-2 hover:bg-gray-100"
                 >
-                  Shirinliklar
+                  
+                  {t("Shirinliklar")}
                 </Link>
               </div>
             )}
@@ -168,20 +184,20 @@ const Header = () => {
                 className="flex items-center gap-1 text-gray-700 hover:text-green-700 cursor-pointer"
                 onClick={() => setModal(true)}
               >
-                <FaRegUser /> Kirish
+                <FaRegUser /> {t("Kirish")}
               </button>
             )}
             <Link
               to="like"
               className="flex items-center gap-1 text-gray-700 hover:text-green-700"
             >
-              <FaRegHeart /> Saralangan
+              <FaRegHeart /> {t("Saralangan")}
             </Link>
             <Link
               to="shopcars"
               className="flex items-center gap-1 text-gray-700 hover:text-green-700 relative"
             >
-              <LiaShoppingBagSolid /> Savat
+              <LiaShoppingBagSolid /> {t("Savat")}
               <span className="absolute -top-2 -right-3 bg-green-500 w-[15px] flex justify-center text-white text-xs px-2 py-0.5 rounded-full">
                 2
               </span>
@@ -202,7 +218,7 @@ const Header = () => {
             className="flex flex-col items-center text-gray-500 transition-all duration-200 active:text-green-600"
           >
             <GiGrapes className="text-2xl" />
-            <p className="text-sm font-medium">Bosh sahifa</p>
+            <p className="text-sm font-medium">{t("Bosh sahifa")}</p>
           </NavLink>
 
           <NavLink
@@ -210,7 +226,7 @@ const Header = () => {
             className="flex flex-col items-center text-gray-500 transition-all duration-200 active:text-green-600"
           >
             <BiSearch className="text-2xl" />
-            <p className="text-sm font-medium">Katalog</p>
+            <p className="text-sm font-medium">{t("Katalog")}</p>
           </NavLink>
 
           <NavLink
@@ -218,7 +234,7 @@ const Header = () => {
             className="flex flex-col items-center relative text-gray-500 transition-all duration-200 active:text-green-600"
           >
             <FiShoppingBag className="text-2xl" />
-            <p className="text-sm font-medium">Savat</p>
+            <p className="text-sm font-medium">{t("Savat")}</p>
             <span className="absolute -top-1 -right-2 bg-green-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">
               1
             </span>
@@ -229,7 +245,7 @@ const Header = () => {
             className="flex flex-col items-center text-gray-500 transition-all duration-200 active:text-green-600"
           >
             <AiOutlineHeart className="text-2xl" />
-            <p className="text-sm font-medium">Saralangan</p>
+            <p className="text-sm font-medium">{t("Saralangan")}</p>
           </NavLink>
 
           <NavLink
