@@ -9,6 +9,7 @@ import { BiSearch } from "react-icons/bi";
 import { FiShoppingBag } from "react-icons/fi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { HiOutlineUser } from "react-icons/hi";
+import SearchForm from './search-form/index';
 import Modal from "./Modal/Modal";
 import axios from "axios";
 import { BACKEND_URL } from "../../Api/Beckend";
@@ -16,9 +17,11 @@ import { BACKEND_URL } from "../../Api/Beckend";
 const Header = () => {
   const [open, setOpen] = useState(false);
   const [modal, setModal] = useState(false);
+  
   const [firstName, setFirstName] = useState(null);
   const menuRef = useRef(null);
-  const token = localStorage.getItem("token");
+  const res = "responsive"
+  const token = localStorage.getItem('token')
 
   const handleClickOutside = (event) => {
     if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -35,6 +38,7 @@ const Header = () => {
           },
         });
         setFirstName(response?.data?.data?.firstName);
+        console.log(response?.data?.data?.firstName);
       } catch (error) {
         console.error(error);
       }
@@ -146,15 +150,8 @@ const Header = () => {
           </div>
 
           {/* Qidiruv paneli (katta ekranlar uchun) */}
-          <div className="flex border border-gray-400 overflow-hidden hidden lg:flex">
-            <input
-              type="text"
-              placeholder="Mahsulotlar izlash"
-              className="px-3 py-2 outline-none w-104 h-10 text-green-700 font-bold"
-            />
-            <button className="w-15 bg-green-200 flex justify-center items-center text-[21px] text-green-700 hover:bg-green-300 transition">
-              <IoSearchSharp />
-            </button>
+          <div className="max-w-103 w-full hidden lg:block">
+            <SearchForm />
           </div>
 
           {/* Foydalanuvchi va savat (katta ekranlar uchun) */}
@@ -194,21 +191,9 @@ const Header = () => {
       </div>
 
       {/* Mobil versiya uchun qidiruv paneli (katta menyudagi qidiruvni pastga tushirish) */}
-      <div className="w-full flex justify-center lg:hidden">
-        <div className="container flex justify-center">
-          <div className="flex border border-gray-400 overflow-hidden w-[90%]">
-            <input
-              type="text"
-              placeholder="Mahsulotlar izlash"
-              className="px-3 py-2 outline-none w-full h-10 text-green-700 font-bold"
-            />
-            <button className="w-15 bg-green-200 flex justify-center items-center text-[21px] text-green-700 hover:bg-green-300 transition">
-              <IoSearchSharp />
-            </button>
-          </div>
-        </div>
+      <div className="max-w-[1200px] w-full mx-auto px-[20px] mb-[10px] lg:hidden">
+        <SearchForm res={res} />
       </div>
-
       {/* Mobil versiya uchun pastki menyu */}
       <div className="fixed w-full h-[60px] px-6 py-3 border-t bg-white flex justify-center bottom-0 lg:hidden">
         <div className="container h-full flex justify-between items-center max-w-[1200px] mx-auto">
@@ -257,7 +242,7 @@ const Header = () => {
         </div>
       </div>
 
-      {modal && <Modal setCheck={setModal} />}
+      {modal && <Modal   setCheck={setModal} />}
     </header>
   );
 };
