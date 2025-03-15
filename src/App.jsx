@@ -34,12 +34,10 @@ const App = () => {
               <Route path="settings" element={<UserSettings />} />
             </Route>
             <Route path="like" element={<Like />} />
-
             <Route path="products" element={<Products />}>
               <Route path="tea" element={<Tea />} />
               <Route path="sweets" element={<Sweets />} />
             </Route>
-
             <Route path="shopcars" element={<Shopcars />} />
             <Route path="shoppages" element={<ShopPages />} />
             {/* <Route path="orders" element={<Orders />} /> */}
