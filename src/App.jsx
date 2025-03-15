@@ -1,35 +1,45 @@
-import React from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Layout from './components/Layout/Layout'
-import HomePage from './Pages/home/HomePage'
-import Like from './Pages/Like/Like'
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Layout from "./components/Layout/Layout";
+import HomePage from "./Pages/home/HomePage";
+import About from "./Pages/KompaniyaXaqida/About";
+import UserPage from "./Pages/Foydalanuchi/UserPage";
+import Shirinliklar from "./Pages/Shirinliklar/Shirinliklar";
+import Faq from "./Pages/Savol-javob/Faq";
+import ShopPages from "./Pages/Savat/ShopPages";
+import Shopcars from "./Pages/Hozir-sotip-olish/Shopcars";
+import Orders from "./Pages/Buyurtmalarim/Orders";
+import Like from "./Pages/Saralangan/Like";
+import NotFount from "./Pages/NotFount/NotFount";
+import Products from "./Pages/products/Products";
+import Tea from "./components/producs/Tea";
+import Sweets from "./components/producs/Sweets";
+import Card from "./components/card/Card";
 
 const App = () => {
   return (
     <>
-         <BrowserRouter>
-      <Routes>
-        <Route element={<Layout/>}>
-
-          <Route index element={<HomePage/>} />
-          
-          <Route path="like" element={<Like />} />
-          {/* <Route path="brands" element={<BrandsPage />} /> */}
-          {/* <Route path="brands/:id" element={<SingleBrandPage />} />
-          <Route path="services/uslugbuggies" element={<UslugBuggiesPage />} />
-          <Route path="services/uslugcar" element={<UslugCarPage />} />
-          <Route path="services" element={<ServicePage />} />
-          <Route path="about" element={<AboutPage />} />
-          <Route path="contact" element={<ContactPage />} />
-          <Route path="blog" element={<BlogPage />} />
-          <Route path="blog/singleblog" element={<SingleBlogPage />} />
-          <Route path="blog/singleblog2" element={<SingleBlogPage2 />} />
-          <Route path="blog/singleblog3" element={<SingleBlogPage3 />} /> */}
-        </Route>
-      </Routes>
-    </BrowserRouter>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<Layout />}>
+            <Route index element={<HomePage />} />
+            <Route path="*" element={<NotFount/>}/>
+            <Route path="like" element={<Like />} />
+            <Route path="about" element={<About />} />
+            <Route path="user" element={<UserPage />} />
+            <Route path="like" element={<Like/>} />
+            <Route path="products" element={<Products />} />
+            <Route path="products/tea" element={<Tea />} /> 
+            <Route path="products/sweets" element={<Sweets />} />
+            <Route path="shopcars" element={<Shopcars/>} />
+            <Route path="shoppages" element={<ShopPages/>}/>
+            <Route path="orders" element={<Orders/>}/>
+            <Route path="faq" element={<Faq/>}/>
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
