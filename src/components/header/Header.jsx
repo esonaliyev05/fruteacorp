@@ -9,10 +9,26 @@ import { BiSearch } from "react-icons/bi";
 import { FiShoppingBag } from "react-icons/fi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { HiOutlineUser } from "react-icons/hi";
+import SearchForm from './search-form/index';
+import Modal from "./Modal/Modal";
+import axios from "axios";
+import { BACKEND_URL } from "../../Api/Beckend";
+import { useTranslation } from "react-i18next";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
+  const [modal, setModal] = useState(false);
+  const [firstName, setFirstName] = useState(null);
   const menuRef = useRef(null);
+  const res = "responsive";
+  const token = localStorage.getItem('token');
+  console.log(token);
+
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+  };
 
   const handleClickOutside = (event) => {
     if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -21,11 +37,28 @@ const Header = () => {
   };
 
   useEffect(() => {
+    const getMe = async () => {
+      try {
+        const response = await axios.get(`${BACKEND_URL}/auth/getme`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setFirstName(response?.data?.data?.firstName);
+      } catch (error) {
+        console.error("Xatolik:", error.response?.data || error.message);
+      }
+    };
+
+    if (token) {
+      getMe();
+    }
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [token]);
 
   return (
     <header className="w-full">
@@ -34,14 +67,16 @@ const Header = () => {
         <div className="container flex justify-center items-center px-4 gap-[15px] max-w-[1200px] mx-auto">
           <ul className="flex gap-4 text-[16px] font-semibold">
             <Link to="products" className="hover:text-green-700">
-              Hozir sotib olish
+              {t("Hozir sotib olish")}
             </Link>
             <Link to="faq" className="hover:text-green-700">
-              Savol-Javob
+              {t("Savol-Javob")}
             </Link>
-            <Link to="/orders" className="hover:text-green-700">
-              Buyurtmalarim
-            </Link>
+            {token && (
+              <Link to="/user" className="hover:text-green-700">
+                {t("Buyurtmalarim")}
+              </Link>
+            )}
           </ul>
 
           <div className="flex items-center gap-2">
@@ -49,16 +84,19 @@ const Header = () => {
               src="public/navbar/uz-DrneayDM.png"
               alt="Uz"
               className="w-6 h-6 cursor-pointer"
+              onClick={() => changeLanguage("uz")}
             />
             <img
               src="public/navbar/en-BAm130Vq.png"
-              alt="Ru"
+              alt="En"
               className="w-6 h-6 cursor-pointer"
+              onClick={() => changeLanguage("en")}
             />
             <img
               src="public/navbar/ru-CMQfAJug.png"
-              alt="En"
+              alt="Ru"
               className="w-6 h-6 cursor-pointer"
+              onClick={() => changeLanguage("ru")}
             />
           </div>
         </div>
@@ -66,7 +104,7 @@ const Header = () => {
 
       {/* Asosiy navbar */}
       <div className="bg-white py-3 flex justify-center">
-        <div className="container w-full max-w-[1200px] h-[80px] flex items-center justify-between px-4 sm:px-6 h-[40px] lg:px-8 mx-auto">
+        <div className="container w-full max-w-[1300px] h-[80px] flex items-center justify-between px-4 sm:px-6 lg:px-8 mx-auto">
           {/* Logo */}
           <div>
             <Link to="/">
@@ -84,16 +122,19 @@ const Header = () => {
               src="public/navbar/uz-DrneayDM.png"
               alt="Uz"
               className="w-6 h-6 cursor-pointer"
+              onClick={() => changeLanguage("uz")}
             />
             <img
               src="public/navbar/en-BAm130Vq.png"
               alt="Ru"
               className="w-6 h-6 cursor-pointer"
+              onClick={() => changeLanguage("ru")}
             />
             <img
               src="public/navbar/ru-CMQfAJug.png"
               alt="En"
               className="w-6 h-6 cursor-pointer"
+              onClick={() => changeLanguage("en")}
             />
           </div>
 
@@ -103,7 +144,7 @@ const Header = () => {
               onClick={() => setOpen(!open)}
               className="flex items-center gap-2 bg-green-200 w-[120px] h-[35px] justify-center text-green-700 rounded-md font-semibold hover:bg-green-300 transition"
             >
-              {open ? <HiMiniBarsArrowUp /> : <HiMiniBarsArrowDown />} Katalog
+              {open ? <HiMiniBarsArrowUp /> : <HiMiniBarsArrowDown />} {t("Katalog")}
             </button>
 
             {open && (
@@ -112,49 +153,51 @@ const Header = () => {
                   to="products/tea"
                   className="block px-4 py-2 hover:bg-gray-100"
                 >
-                  Choy
+                  {t("Choy")}
                 </Link>
                 <Link
                   to="products/sweets"
                   className="block px-4 py-2 hover:bg-gray-100"
                 >
-                  Shirinliklar
+                  {t("Shirinliklar")}
                 </Link>
               </div>
             )}
           </div>
 
           {/* Qidiruv paneli (katta ekranlar uchun) */}
-          <div className="flex border border-gray-400 overflow-hidden hidden lg:flex">
-            <input
-              type="text"
-              placeholder="Mahsulotlar izlash"
-              className="px-3 py-2 outline-none w-104 h-10 text-green-700 font-bold"
-            />
-            <button className="w-15 bg-green-200 flex justify-center items-center text-[21px] text-green-700 hover:bg-green-300 transition">
-              <IoSearchSharp />
-            </button>
+          <div className="max-w-103 w-full hidden lg:block">
+            <SearchForm />
           </div>
 
           {/* Foydalanuvchi va savat (katta ekranlar uchun) */}
           <div className="hidden lg:flex items-center gap-4">
-            <Link
-              to="user"
-              className="flex items-center gap-1 text-gray-700 hover:text-green-700"
-            >
-              <FaRegUser /> Kirish
-            </Link>
+            {firstName ? (
+              <Link
+                to={"user"}
+                className="flex items-center gap-1 text-gray-700 hover:text-green-700 cursor-pointer"
+              >
+                <FaRegUser /> {firstName}
+              </Link>
+            ) : (
+              <button
+                className="flex items-center gap-1 text-gray-700 hover:text-green-700 cursor-pointer"
+                onClick={() => setModal(true)}
+              >
+                <FaRegUser /> {t("Kirish")}
+              </button>
+            )}
             <Link
               to="like"
               className="flex items-center gap-1 text-gray-700 hover:text-green-700"
             >
-              <FaRegHeart /> Saralangan
+              <FaRegHeart /> {t("Saralangan")}
             </Link>
             <Link
               to="shopcars"
               className="flex items-center gap-1 text-gray-700 hover:text-green-700 relative"
             >
-              <LiaShoppingBagSolid /> Savat
+              <LiaShoppingBagSolid /> {t("Savat")}
               <span className="absolute -top-2 -right-3 bg-green-500 w-[15px] flex justify-center text-white text-xs px-2 py-0.5 rounded-full">
                 2
               </span>
@@ -164,21 +207,9 @@ const Header = () => {
       </div>
 
       {/* Mobil versiya uchun qidiruv paneli (katta menyudagi qidiruvni pastga tushirish) */}
-      <div className="w-full flex justify-center lg:hidden">
-        <div className="container flex justify-center">
-          <div className="flex border border-gray-400 overflow-hidden w-[90%]">
-            <input
-              type="text"
-              placeholder="Mahsulotlar izlash"
-              className="px-3 py-2 outline-none w-full h-10 text-green-700 font-bold"
-            />
-            <button className="w-15 bg-green-200 flex justify-center items-center text-[21px] text-green-700 hover:bg-green-300 transition">
-              <IoSearchSharp />
-            </button>
-          </div>
-        </div>
+      <div className="max-w-[1200px] w-full mx-auto px-[20px] mb-[10px] lg:hidden">
+        <SearchForm res={res} />
       </div>
-
       {/* Mobil versiya uchun pastki menyu */}
       <div className="fixed w-full h-[60px] px-6 py-3 border-t bg-white flex justify-center bottom-0 lg:hidden">
         <div className="container h-full flex justify-between items-center max-w-[1200px] mx-auto">
@@ -187,45 +218,50 @@ const Header = () => {
             className="flex flex-col items-center text-gray-500 transition-all duration-200 active:text-green-600"
           >
             <GiGrapes className="text-2xl" />
-            <p className="text-sm font-medium">Bosh sahifa</p>
+            <p className="text-sm font-medium">{t("Bosh sahifa")}</p>
           </NavLink>
 
           <NavLink
-            to="/katalog"
+            to="/products"
             className="flex flex-col items-center text-gray-500 transition-all duration-200 active:text-green-600"
           >
             <BiSearch className="text-2xl" />
-            <p className="text-sm font-medium">Katalog</p>
+            <p className="text-sm font-medium">{t("Katalog")}</p>
           </NavLink>
 
           <NavLink
-            to="/savat"
+            to="/shopcars"
             className="flex flex-col items-center relative text-gray-500 transition-all duration-200 active:text-green-600"
           >
             <FiShoppingBag className="text-2xl" />
-            <p className="text-sm font-medium">Savat</p>
+            <p className="text-sm font-medium">{t("Savat")}</p>
             <span className="absolute -top-1 -right-2 bg-green-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">
               1
             </span>
           </NavLink>
 
           <NavLink
-            to="/saralangan"
+            to="/like"
             className="flex flex-col items-center text-gray-500 transition-all duration-200 active:text-green-600"
           >
             <AiOutlineHeart className="text-2xl" />
-            <p className="text-sm font-medium">Saralangan</p>
+            <p className="text-sm font-medium">{t("Saralangan")}</p>
           </NavLink>
 
           <NavLink
             to="/kabinet"
             className="flex flex-col items-center text-gray-500 transition-all duration-200 active:text-green-600"
+            onClick={() => setModal(true)}
           >
             <HiOutlineUser className="text-2xl" />
-            <p className="text-sm font-medium">Kabinet</p>
+            <p className="text-sm font-medium">{t("Kabinet")}</p>
+            
           </NavLink>
+          
         </div>
       </div>
+
+      {modal && <Modal setCheck={setModal} />}
     </header>
   );
 };
