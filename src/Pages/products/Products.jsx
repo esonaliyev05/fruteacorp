@@ -1,34 +1,63 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
-import Tea from "../../components/producs/Tea";
+import { Link, Outlet, useLocation } from "react-router-dom";
 
 const Products = () => {
+  const location = useLocation(); // URL ni kuzatish uchun
+
   return (
-    <div className="flex justify-center items-center min-h-screen">
-
-    <div className="container w-[1200px] min-h-[80vh] mx-auto flex justify-center items-center">
-      <div className="w-full flex justify-center items-start gap-8">
-        {/* Chap tomondagi menyu */}
-        <div className="w-[15%] flex gap-4 flex-col">
-          <div className="w-full flex gap-2"> 
-            <NavLink to="/" className="font-bold">Boshsahifa</NavLink> /
-            <p>Turkumlar</p>
+    <div className="flex justify-center min-h-screen">
+      <div className="container max-w-[1200px] w-full min-h-[80vh] mx-auto flex">
+        <div className="w-full flex flex-col md:flex-row gap-8">
+          {/* Sidebar */}
+          <div className="w-full md:w-[25%] flex gap-4 flex-col sticky top-0">
+            <div className="w-full flex gap-1">
+              <span className="font-bold">Bosh sahifa</span> /
+              <span className="font-bold">Turkumlar</span>
+              {location.pathname.includes("tea") && (
+                <>
+                  {" / "}
+                  <span className="font-bold">Choy</span>
+                </>
+              )}
+              {location.pathname.includes("sweets") && (
+                <>
+                  {" / "}
+                  <span className="font-bold">Shirinliklar</span>
+                </>
+              )}
+            </div>
+            <div className="flex flex-col mt-[25px]">
+              <p className="font-[600] text-[20px]">Turkumlar</p>
+              <Link
+                to="tea" // URL ni o'zgartiradi
+                className={`text-left ${
+                  location.pathname.includes("tea")
+                    ? "text-blue-500 font-bold"
+                    : "text-gray-500"
+                } hover:text-blue-500`}
+              >
+                Choy
+              </Link>
+              <Link
+                to="sweets" // URL ni o'zgartiradi
+                className={`text-left ${
+                  location.pathname.includes("sweets")
+                    ? "text-blue-500 font-bold"
+                    : "text-gray-500"
+                } hover:text-blue-500`}
+              >
+                Shirinliklar
+              </Link>
+            </div>
           </div>
-          <div className="flex flex-col mt-[25px]">
-            <p className="font-[600] text-[20px]">Turkumlar</p>
-            <NavLink to={"Tea"}>Choy</NavLink>
-            <NavLink to={"sweets"}>Shirinliklar</NavLink>
-          </div>
-        </div>
 
-        {/* Asosiy kontent */}
-        <div className="w-[80%]">
-          <Tea />
+          {/* Main Content */}
+          <div className="w-full md:w-[80%] overflow-y-auto">
+            <Outlet /> {/* Tea yoki Sweets komponentlari shu yerda ko'rinadi */}
+          </div>
         </div>
       </div>
     </div>
-    </div>
-
   );
 };
 
