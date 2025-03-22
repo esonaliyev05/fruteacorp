@@ -8,7 +8,7 @@ const NotFount = () => {
       setTime(new Date());
     }, 1000);
 
-    return () => clearInterval(interval); // Komponent unmount bo'lganda intervalni tozalash
+    return () => clearInterval(interval); 
   }, []);
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
