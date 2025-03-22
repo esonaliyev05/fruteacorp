@@ -26,13 +26,3 @@ const NotFount = () => {
 
 export default NotFount
 
-// import React, { useState, useEffect } from "react";
-
-
-
-//   return (
-
-//   );
-// };
-
-// export default RealTimeClock;
